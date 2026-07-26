@@ -19,15 +19,14 @@
 
     <packaging>pom</packaging>
 
-    <name>Common Modules</name>
+    <name>Common</name>
 
     <description>
-        Parent module for common shared components.
+        Shared library for common classes used across services.
     </description>
 
     <modules>
 
-        <module>src</module>
+        <module>common-core</module>
     </modules>
-
 </project>

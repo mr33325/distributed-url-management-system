@@ -1,0 +1,104 @@
+@startuml DistributedURLManagementSystem_Container
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title C4 Level 2 - Container Diagram
+title Distributed URL Management System
+
+LAYOUT_TOP_DOWN()
+
+' ============================================================================
+' People
+' ============================================================================
+
+Person(anonymous, "Anonymous User")
+Person(user, "Authenticated User")
+Person(admin, "Administrator")
+
+' ============================================================================
+' External Containers
+' ============================================================================
+
+System_Ext(frontend, "React Web Application", "React SPA")
+
+System_Ext(email, "Email Provider", "Future")
+
+System_Ext(grafana, "Grafana", "Monitoring Dashboards")
+
+' ============================================================================
+' System Boundary
+' ============================================================================
+
+System_Boundary(system, "Distributed URL Management System") {
+
+    Container(gateway,
+        "API Gateway",
+        "Spring Cloud Gateway",
+        "Entry point, routing, authentication, rate limiting")
+
+    Container(auth,
+        "Authentication Service",
+        "Spring Boot",
+        "User management, JWT authentication and authorization")
+
+    Container(url,
+        "URL Service",
+        "Spring Boot",
+        "URL shortening, redirect resolution, URL management")
+
+    Container(analytics,
+        "Analytics Service",
+        "Spring Boot",
+        "Processes click events and generates reports")
+
+    Container(adminService,
+        "Admin Service",
+        "Spring Boot",
+        "Administrative APIs and platform management")
+
+    ContainerDb(postgres,
+        "PostgreSQL",
+        "PostgreSQL",
+        "Persistent relational storage")
+
+    ContainerDb(redis,
+        "Redis",
+        "Redis",
+        "Caching, sessions and distributed rate limiting")
+
+    ContainerQueue(kafka,
+        "Kafka",
+        "Apache Kafka",
+        "Asynchronous event streaming")
+}
+
+' ============================================================================
+' Relationships
+' ============================================================================
+
+Rel(anonymous, frontend, "Uses", "HTTPS")
+Rel(user, frontend, "Uses", "HTTPS")
+Rel(admin, frontend, "Uses", "HTTPS")
+
+Rel(frontend, gateway, "REST APIs", "HTTPS / JSON")
+
+Rel(gateway, auth, "Authentication requests")
+Rel(gateway, url, "URL operations")
+Rel(gateway, analytics, "Analytics queries")
+Rel(gateway, adminService, "Administrative APIs")
+
+Rel(auth, postgres, "Reads/Writes")
+Rel(url, postgres, "Reads/Writes")
+Rel(adminService, postgres, "Reads/Writes")
+
+Rel(url, redis, "Caches URLs")
+Rel(gateway, redis, "Rate limiting")
+
+Rel(url, kafka, "Publishes events")
+Rel(analytics, kafka, "Consumes events")
+
+Rel(auth, email, "Sends verification emails")
+
+Rel(admin, grafana, "Views dashboards")
+
+@enduml

@@ -1,0 +1,76 @@
+@startuml DistributedURLManagementSystem_Context
+
+' ============================================================================
+' C4 PlantUML
+' ============================================================================
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+title C4 Level 1 - System Context Diagram
+title Distributed URL Management System
+
+LAYOUT_TOP_DOWN()
+
+' ============================================================================
+' People
+' ============================================================================
+
+Person(anonymous, "Anonymous User",
+"Creates and accesses shortened URLs.")
+
+Person(user, "Authenticated User",
+"Manages URLs and views analytics.")
+
+Person(admin, "Administrator",
+"Monitors the platform and manages users.")
+
+' ============================================================================
+' External Systems
+' ============================================================================
+
+System_Ext(frontend,
+"React Web Application",
+"Single Page Application")
+
+System_Ext(email,
+"Email Provider",
+"Verification and notifications (Future)")
+
+System_Ext(grafana,
+"Grafana",
+"Monitoring dashboards")
+
+' ============================================================================
+' System Boundary
+' ============================================================================
+
+System_Boundary(system, "Distributed URL Management System") {
+
+    System(urlSystem,
+    "Distributed URL Management System",
+    "Production-grade URL shortening platform")
+
+}
+
+' ============================================================================
+' Relationships
+' ============================================================================
+
+Rel(anonymous, frontend, "Uses", "HTTPS")
+
+Rel(user, frontend, "Uses", "HTTPS")
+
+Rel(admin, frontend, "Uses", "HTTPS")
+
+Rel(frontend, urlSystem,
+"Invokes REST APIs",
+"HTTPS / JSON")
+
+Rel(urlSystem, email,
+"Sends emails",
+"SMTP / REST")
+
+Rel(admin, grafana,
+"Views metrics")
+
+@enduml
