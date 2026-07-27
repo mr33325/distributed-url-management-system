@@ -10,7 +10,7 @@
 
     <groupId>io.mahesh.projectspace</groupId>
     <artifactId>distributed-url-management-system</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>v0.1.0-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
@@ -34,6 +34,7 @@
         <maven.surefire.plugin.version>3.5.4</maven.surefire.plugin.version>
         <maven.failsafe.plugin.version>3.5.4</maven.failsafe.plugin.version>
         <spring.boot.maven.plugin.version>${spring.boot.version}</spring.boot.maven.plugin.version>
+        <maven.codehaus.version.plugin.version>2.18.0</maven.codehaus.version.plugin.version>
 
         <!-- Encoding -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -126,6 +127,12 @@
                     </configuration>
                 </plugin>
 
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>${maven.codehaus.version.plugin.version}</version>
+                </plugin>
+
             </plugins>
 
         </pluginManagement>
@@ -139,6 +146,11 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
             </plugin>
         </plugins>
 
