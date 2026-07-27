@@ -15,30 +15,21 @@ LAYOUT_TOP_DOWN()
 ' People
 ' ============================================================================
 
-Person(anonymous, "Anonymous User",
-"Creates and accesses shortened URLs.")
+Person(anonymous, "Anonymous User", "Creates and accesses shortened URLs.")
 
-Person(user, "Authenticated User",
-"Manages URLs and views analytics.")
+Person(user, "Authenticated User", "Manages URLs and views analytics.")
 
-Person(admin, "Administrator",
-"Monitors the platform and manages users.")
+Person(admin, "Administrator", "Monitors the platform and manages users.")
 
 ' ============================================================================
 ' External Systems
 ' ============================================================================
 
-System_Ext(frontend,
-"React Web Application",
-"Single Page Application")
+System_Ext(frontend, "React Web Application", "Single Page Application")
 
-System_Ext(email,
-"Email Provider",
-"Verification and notifications (Future)")
+System_Ext(email, "Email Provider", "Verification and notifications (Future)")
 
-System_Ext(grafana,
-"Grafana",
-"Monitoring dashboards")
+System_Ext(grafana, "Grafana", "Monitoring dashboards")
 
 ' ============================================================================
 ' System Boundary
@@ -46,9 +37,7 @@ System_Ext(grafana,
 
 System_Boundary(system, "Distributed URL Management System") {
 
-    System(urlSystem,
-    "Distributed URL Management System",
-    "Production-grade URL shortening platform")
+    System(urlSystem,"Distributed URL Management System","Production-grade URL shortening platform")
 
 }
 
@@ -62,15 +51,10 @@ Rel(user, frontend, "Uses", "HTTPS")
 
 Rel(admin, frontend, "Uses", "HTTPS")
 
-Rel(frontend, urlSystem,
-"Invokes REST APIs",
-"HTTPS / JSON")
+Rel(frontend, urlSystem, "Invokes REST APIs", "HTTPS / JSON")
 
-Rel(urlSystem, email,
-"Sends emails",
-"SMTP / REST")
+Rel(urlSystem, email, "Sends emails", "SMTP / REST")
 
-Rel(admin, grafana,
-"Views metrics")
+Rel(admin, grafana, "Views metrics")
 
 @enduml

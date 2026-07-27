@@ -31,45 +31,21 @@ System_Ext(grafana, "Grafana", "Monitoring Dashboards")
 
 System_Boundary(system, "Distributed URL Management System") {
 
-    Container(gateway,
-        "API Gateway",
-        "Spring Cloud Gateway",
-        "Entry point, routing, authentication, rate limiting")
+    Container(gateway, "API Gateway", "Spring Cloud Gateway", "Entry point, routing, authentication, rate limiting")
 
-    Container(auth,
-        "Authentication Service",
-        "Spring Boot",
-        "User management, JWT authentication and authorization")
+    Container(auth, "Authentication Service", "Spring Boot", "User management, JWT authentication and authorization")
 
-    Container(url,
-        "URL Service",
-        "Spring Boot",
-        "URL shortening, redirect resolution, URL management")
+    Container(url, "URL Service", "Spring Boot", "URL shortening, redirect resolution, URL management")
 
-    Container(analytics,
-        "Analytics Service",
-        "Spring Boot",
-        "Processes click events and generates reports")
+    Container(analytics, "Analytics Service", "Spring Boot", "Processes click events and generates reports")
 
-    Container(adminService,
-        "Admin Service",
-        "Spring Boot",
-        "Administrative APIs and platform management")
+    Container(adminService, "Admin Service", "Spring Boot", "Administrative APIs and platform management")
 
-    ContainerDb(postgres,
-        "PostgreSQL",
-        "PostgreSQL",
-        "Persistent relational storage")
+    ContainerDb(postgres, "PostgreSQL", "PostgreSQL", "Persistent relational storage")
 
-    ContainerDb(redis,
-        "Redis",
-        "Redis",
-        "Caching, sessions and distributed rate limiting")
+    ContainerDb(redis, "Redis", "Redis", "Caching, sessions and distributed rate limiting")
 
-    ContainerQueue(kafka,
-        "Kafka",
-        "Apache Kafka",
-        "Asynchronous event streaming")
+    ContainerQueue(kafka, "Kafka", "Apache Kafka", "Asynchronous event streaming")
 }
 
 ' ============================================================================
