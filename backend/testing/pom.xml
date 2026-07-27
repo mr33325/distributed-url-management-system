@@ -11,7 +11,7 @@
     <parent>
         <groupId>io.mahesh.projectspace</groupId>
         <artifactId>distributed-url-management-system</artifactId>
-        <version>v0.1.0-SNAPSHOT</version>
+        <version>v0.1.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
